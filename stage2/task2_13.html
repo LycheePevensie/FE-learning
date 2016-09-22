@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 2-13</title>
+  </head>
+<body>
+
+  <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+  <button id="button" onClick="">确认填写</button>
+
+  <div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+<script type="text/javascript">
+
+    (function() {
+        /*给按钮button绑定一个点击事件
+         在事件处理函数中获取aqi-input输入的值，并显示在aqi-display中*/
+        var $ = function(id){
+            return document.getElementById(id);
+        }
+        var _btn = $('button');
+        if(_btn.attachEvent){
+            _btn.attachEvent("onclick",click);
+        }else if(_btn.addEventListener){
+            _btn.addEventListener("click",click,false);
+        }
+
+        $('aqi-input').onkeyup = function(event){
+            if(event.keyCode === 13){
+                click();
+            }
+        }
+        function click(){
+            var _value = parseInt($('aqi-input').value.replace(/("\s|u00A0")+|[<>]+/g,""));//strip blank && avoid XSS
+            if(!isNaN(_value) && _value>=0 &&_value<=1000){
+                $('aqi-display').innerHTML = _value;
+            }else{
+                alert($('aqi-input').value + "不是合法的空气指数,请重新输入0-1000的有效整数！");
+            }
+        }
+    })();
+
+</script>
+</body>
+</html>

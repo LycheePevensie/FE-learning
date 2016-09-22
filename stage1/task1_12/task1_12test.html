@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>task_12</title>
+<!--     <link rel="stylesheet" href="style.css"/> -->
+    
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Microsoft Yahei";
+        }
+        .table-rank{    
+            font-size: 16px;
+            line-height: 21px;
+        }
+        .table-rank th{
+            color: #fff;
+            background-color: #000;
+            text-align: left;
+        }
+        .table-mark{
+            color: #f00;
+        }
+        .table-rank tr:nth-child(2n+1){
+            background-color: #ccc;
+        }
+        form input{
+            margin-top: 50px;
+            width:100px;
+            transition:0.5s width;
+        }
+        form input:focus{
+            width:200px;
+        }
+        .banner{
+            width: 300px;
+            height:100px;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-container{
+            display: inline-block;
+            position: relative;
+            width: 300%;
+            height: 100%;
+            left: 0;
+            transition: 0.5s left;
+            font-size: 0;
+        }
+        .banner-container li{
+            display: inline-block;
+            list-style:none;
+            width:300px;
+            height: 100px;
+        }
+        .banner-container li:nth-child(1){
+            background-color: #00f;
+        }
+        .banner-container li:nth-child(2){
+            background-color: #0f0;
+        }
+        .banner-container li:nth-child(3){
+            background-color: #f00;
+        }
+        .banner-controller{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+        .banner-controller a{
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background-color: #fff;
+            opacity: 0.5;
+            color: #ccc;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+        }
+        #img1:target~.banner-container{
+            left:0;
+        }
+        #img2:target~.banner-container{
+            left:-100%;
+        }
+        #img3:target~.banner-container{
+            left:-200%;
+        }
+
+    </style>
+</head>
+<body>
+    <table class="table-rank">
+        <tr>
+            <th>排名</th>
+            <th>网站</th>
+            <th>热度</th>
+        </tr>
+        <tr class="table-mark">
+            <td>1.</td>
+            <td>百度前端技术学院</td>
+            <td>13000</td>
+        </tr>
+        <tr class="table-mark">
+            <td>2.</td>
+            <td>百度前端技术学院</td>
+            <td>12000</td>
+        </tr>
+        <tr class="table-mark">
+            <td>3.</td>
+            <td>百度前端技术学院</td>
+            <td>11000</td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>百度前端技术学院</td>
+            <td>10000</td>
+        </tr>
+        <tr>
+            <td>5.</td>
+            <td>百度前端技术学院</td>
+            <td>9000</td>
+        </tr>
+        <tr>
+            <td>6.</td>
+            <td>百度前端技术学院</td>
+            <td>8000</td>
+        </tr>
+        <tr>
+            <td>7.</td>
+            <td>百度前端技术学院</td>
+            <td>7000</td>
+        </tr>
+        <tr>
+            <td>8.</td>
+            <td>百度前端技术学院</td>
+            <td>6000</td>
+        </tr>
+        <tr>
+            <td>9.</td>
+            <td>百度前端技术学院</td>
+            <td>5000</td>
+        </tr>
+        <tr>
+            <td>10.</td>
+            <td>百度前端技术学院</td>
+            <td>4000</td>
+        </tr>
+    </table>
+
+    <form action="#">
+        <input type="text" placeholder="点我宽度变化">
+    </form>
+
+    <div class="banner">
+        <span id="img1"></span>
+        <span id="img2"></span>
+        <span id="img3"></span>
+        <ul class="banner-container">
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="banner-controller">
+            <a href="#img1">1</a>
+            <a href="#img2">2</a>
+            <a href="#img3">3</a>
+        </div>
+    </div>
+
+</body>
+</html>

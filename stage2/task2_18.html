@@ -32,6 +32,7 @@
         var $ = function(id){
             return document.getElementById(id);
         };
+        //添加事件
         function addHandler(ele,type,handler){
             if(ele.addEventListener){
                 ele.addEventListener(type,handler);
@@ -41,6 +42,7 @@
                 ele['on'+type] = handler;
             }
         }
+        //渲染队列表现
         function renderQueue(){
             var str = '';
             for(var i=0;i<counts.length;i++){
@@ -48,38 +50,47 @@
             }
             $('queue').innerHTML = str;
         }
+        //左侧入
         function leftI(){
-            var inputNum =$('text-input').value;
-            if(inputNum == null){
-                alert('输入的数字不能为空')
-            }else if(isNaN(inputNum)){
+            var inputNum = $('text-input').value;
+            if(!/^[0-9]+$/.test(inputNum) || isNaN(inputNum)){
                 alert('请输入合法的数字');
             }else{
                 counts.unshift(inputNum);
             }
             renderQueue();
         }
+        //左侧出
         function leftO(){
-            var item = counts.shift();
-            alert(item);
+            if(counts.length != 0){
+                var item = counts.shift();
+                alert(item);
+            }else{
+                alert('数组已为空！');
+            }
             renderQueue();
         }
+        //右侧入
         function rightI(){
             var inputNum =$('text-input').value;
-            if(inputNum == null){
-                alert('输入的数字不能为空')
-            }else if(isNaN(inputNum)){
+            if(!/^[0-9]+$/.test(inputNum) || isNaN(inputNum)){
                 alert('请输入合法的数字');
             }else{
                 counts.push(inputNum);
             }
             renderQueue();
         }
+        //右侧出
         function rightO(){
-            var item = counts.pop();
-            alert(item);
+            if(counts.length != 0){
+                var item = counts.pop();
+                alert(item);
+            }else{
+                alert('数组已为空！');
+            }
             renderQueue();
         }
+
         function init(){
             renderQueue();
             addHandler($('left-in'),'click',leftI);

@@ -49,6 +49,7 @@
                 str += '<div class="num">' + counts[i] + '</div>'
             }
             $('queue').innerHTML = str;
+            DivDel();
         }
         //左侧入
         function leftI(){
@@ -89,6 +90,20 @@
                 alert('数组已为空！');
             }
             renderQueue();
+        }
+        function deleteID(id){
+            counts.splice(id,1);
+            renderQueue();
+        }
+        //单击元素删除
+        function DivDel() {
+            for (var i = 0; i < $('queue').childNodes.length; i++) {
+                addHandler($('queue').childNodes[i], 'click', function (i) {
+                    return function () {
+                        return deleteID(i)
+                    };
+                }(i));
+            }
         }
 
         function init(){

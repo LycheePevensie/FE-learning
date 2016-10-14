@@ -18,104 +18,104 @@
     </style>
 </head>
 <body>
-    <label><input id="text-input" type="text"></label>
-    <button id="left-in">左侧入</button>
-    <button id="right-in">右侧入</button>
-    <button id="left-out">左侧出</button>
-    <button id="right-out">右侧出</button>
-    <div id="queue">
+<label><input id="text-input" type="text"></label>
+<button id="left-in">左侧入</button>
+<button id="right-in">右侧入</button>
+<button id="left-out">左侧出</button>
+<button id="right-out">右侧出</button>
+<div id="queue">
 
-    </div>
+</div>
 
-    <script type="text/javascript">
-        var counts = [10,3,7,12,11,30];
-        var $ = function(id){
-            return document.getElementById(id);
-        };
-        //添加事件
-        function addHandler(ele,type,handler){
-            if(ele.addEventListener){
-                ele.addEventListener(type,handler);
-            }else if(ele.attachEvent){
-                ele.attachEvent('on'+type,handler);
-            }else{
-                ele['on'+type] = handler;
-            }
+<script type="text/javascript">
+    var counts = [10,3,7,12,11,30];
+    var $ = function(id){
+        return document.getElementById(id);
+    };
+    //添加事件
+    function addHandler(ele,type,handler){
+        if(ele.addEventListener){
+            ele.addEventListener(type,handler);
+        }else if(ele.attachEvent){
+            ele.attachEvent('on'+type,handler);
+        }else{
+            ele['on'+type] = handler;
         }
-        //渲染队列表现
-        function renderQueue(){
-            var str = '';
-            for(var i=0;i<counts.length;i++){
-                str += '<div class="num">' + counts[i] + '</div>'
-            }
-            $('queue').innerHTML = str;
-            DivDel();
+    }
+    //渲染队列表现
+    function renderQueue(){
+        var str = '';
+        for(var i=0;i<counts.length;i++){
+            str += '<div class="num">' + counts[i] + '</div>'
         }
-        //左侧入
-        function leftI(){
-            var inputNum = $('text-input').value;
-            if(!/^[0-9]+$/.test(inputNum) || isNaN(inputNum)){
-                alert('请输入合法的数字');
-            }else{
-                counts.unshift(inputNum);
-            }
-            renderQueue();
+        $('queue').innerHTML = str;
+        DivDel();
+    }
+    //左侧入
+    function leftI(){
+        var inputNum = $('text-input').value;
+        if(!/^[0-9]+$/.test(inputNum) || isNaN(inputNum)){
+            alert('请输入合法的数字');
+        }else{
+            counts.unshift(inputNum);
         }
-        //左侧出
-        function leftO(){
-            if(counts.length != 0){
-                var item = counts.shift();
-                alert(item);
-            }else{
-                alert('数组已为空！');
-            }
-            renderQueue();
+        renderQueue();
+    }
+    //左侧出
+    function leftO(){
+        if(counts.length != 0){
+            var item = counts.shift();
+            alert(item);
+        }else{
+            alert('数组已为空！');
         }
-        //右侧入
-        function rightI(){
-            var inputNum =$('text-input').value;
-            if(!/^[0-9]+$/.test(inputNum) || isNaN(inputNum)){
-                alert('请输入合法的数字');
-            }else{
-                counts.push(inputNum);
-            }
-            renderQueue();
+        renderQueue();
+    }
+    //右侧入
+    function rightI(){
+        var inputNum =$('text-input').value;
+        if(!/^[0-9]+$/.test(inputNum) || isNaN(inputNum)){
+            alert('请输入合法的数字');
+        }else{
+            counts.push(inputNum);
         }
-        //右侧出
-        function rightO(){
-            if(counts.length != 0){
-                var item = counts.pop();
-                alert(item);
-            }else{
-                alert('数组已为空！');
-            }
-            renderQueue();
+        renderQueue();
+    }
+    //右侧出
+    function rightO(){
+        if(counts.length != 0){
+            var item = counts.pop();
+            alert(item);
+        }else{
+            alert('数组已为空！');
         }
-        function deleteID(id){
-            counts.splice(id,1);
-            renderQueue();
+        renderQueue();
+    }
+    function deleteID(id){
+        counts.splice(id,1);
+        renderQueue();
+    }
+    //单击元素删除
+    function DivDel() {
+        for (var i = 0; i < $('queue').childNodes.length; i++) {
+            addHandler($('queue').childNodes[i], 'click', function (i) {
+                return function () {
+                    return deleteID(i)
+                };
+            }(i));
         }
-        //单击元素删除
-        function DivDel() {
-            for (var i = 0; i < $('queue').childNodes.length; i++) {
-                addHandler($('queue').childNodes[i], 'click', function (i) {
-                    return function () {
-                        return deleteID(i)
-                    };
-                }(i));
-            }
-        }
+    }
 
-        function init(){
-            renderQueue();
-            addHandler($('left-in'),'click',leftI);
-            addHandler($('right-in'),'click',rightI);
-            addHandler($('left-out'),'click',leftO);
-            addHandler($('right-out'),'click',rightO);
-        }
+    function init(){
+        renderQueue();
+        addHandler($('left-in'),'click',leftI);
+        addHandler($('right-in'),'click',rightI);
+        addHandler($('left-out'),'click',leftO);
+        addHandler($('right-out'),'click',rightO);
+    }
 
-        init();
+    init();
 
-    </script>
+</script>
 </body>
 </html>

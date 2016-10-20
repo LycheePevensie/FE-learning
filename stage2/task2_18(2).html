@@ -28,7 +28,87 @@
     </div>
 
     <script type="text/javascript">
+        var $ = function(ele){return document.querySelector(ele)};
+        //添加事件
+        function addHandler(ele,type,handler){
+            if(ele.addEventListener){
+                ele.addEventListener(type,handler);
+            }else if(ele.attachEvent){
+                ele.attachEvent('on'+type,handler);
+            }else{
+                ele['on'+type] = handler;
+            }
+        }
 
+        window.onload = function(){
+            var queue={
+                str : [],
+                valid:function(num){
+                    if(!/^[0-9]+$/.test(num) || isNaN(num)){
+                        alert('请输入合法的数字');
+                    }else{
+                        return true;
+                    }
+                },
+                isEmpty:function(){
+                    return (this.str.length==0 ? alert("数组已为空") : true);
+                },
+                leftI:function(num){
+                    if(this.valid(num)){
+                        this.str.unshift(num);
+                    }
+                    this.renderQueue();
+                },
+                rightI: function (num) {
+                    if(this.valid(num)){
+                        this.str.push(num);
+                    }
+                    this.renderQueue();
+                },
+                leftO: function () {
+                    if(this.isEmpty()){
+                        alert(this.str.shift());
+                    }
+                    this.renderQueue();
+                },
+                rightO:function(){
+                    if(this.isEmpty()){
+                        alert(this.str.pop());
+                    }
+                    this.renderQueue();
+                },
+                renderQueue:function(){
+                    $('#queue').innerHTML = this.str.map(function(x){return '<div class="num">' + x +'</div>'}).join('');
+                    deleteDiv();
+                },
+                deleteID:function(id){
+                    this.str.splice(id,1);
+                    this.renderQueue();
+                }
+            }
+            function deleteDiv(){
+                for(var i=0;i<$('#queue').childNodes.length;i++){
+                    addHandler($('#queue').childNodes[i],'click',function(i){
+                        return function(){
+                            return queue.deleteID(i);
+                        };
+                    }(i));
+                }
+            }
+            addHandler($('#left-in'),'click',function(){
+                queue.leftI($('#text-input').value);
+            });
+            addHandler($('#left-out'),'click',function(){
+                queue.leftO();
+            });
+            addHandler($('#right-in'),'click',function(){
+                queue.rightI($('#text-input').value);
+            });
+            addHandler($('#right-out'),'click',function(){
+                queue.rightO();
+            });
+
+        }
     </script>
 
 </body>

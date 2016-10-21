@@ -1,0 +1,81 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 2-18</title>
+    <style>
+        .num{
+            float:left;
+            margin: 20px 10px;
+            width:50px;
+            height:50px;
+            font-size: 20px;
+            line-height: 50px;
+            text-align:center;
+            color:#dddddd;
+            background-color: #16324a;
+        }
+    </style>
+</head>
+<body>
+    <label><input id="text-input" type="text"></label>
+    <button id="left-in">左侧入</button>
+    <button id="right-in">右侧入</button>
+    <button id="left-out">左侧出</button>
+    <button id="right-out">右侧出</button>
+    <div id="queue"></div>
+
+    <script type="text/javascript">
+        var $ = function(ele){
+            return document.querySelector(ele);
+        };
+        var data = [];
+        function addHandler(ele,type,handler){
+            if(ele.addEventListener){
+                ele.addEventListener(type,handler);
+            }else if(ele.attachEvent){
+                ele.attachEvent('on'+type,handler);
+            }else{
+                ele['on'+type] = handler;
+            }
+        }
+        function renderQueue(){
+            $('#queue').innerHTML = data.map(function(ele){return '<div class="num">'+ele+'</div>'}).join("");
+        }
+        function deal(func,succ){
+            var args = [].splice.call(arguments,2);
+            return function(e){
+                try{
+                    var arg = args.map(function(item){
+                        return typeof item === 'function' ? item(e) : item;
+                    });
+                    var result = func.apply(data,arg);
+                    if(succ!=null){
+                        succ(result);
+                    }
+                }catch(ex){
+                    alert(ex.message);
+                }
+                renderQueue();
+            }
+        }
+        function getValue(){
+            var num = $('#text-input').value;
+            if(!validate(num)) throw new Error("请输入正确格式的数字！");
+            return parseInt(num);
+        }
+        function getClickIndex(e){
+            var node = e.target;
+            return [].indexOf.call(node.parentNode.children,node);
+        }
+        function validate(num){
+            return ((/^[0-9]+$/).test(num) || !isNaN(num));
+        }
+        addHandler($('#left-in'),'click',deal([].unshift,null,getValue));
+        addHandler($('#right-in'),'click',deal([].push,null,getValue));
+        addHandler($('#left-out'),'click',deal([].shift,window.alert));
+        addHandler($('#right-out'),'click',deal([].pop,window.alert));
+        addHandler($('#queue'),'click',deal([].splice,null,getClickIndex,1));
+    </script>
+</body>
+</html>

@@ -2,16 +2,30 @@ html{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: transparent;
 }
-body{
+*{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+body{
     font-size: 12px;
     line-height: 1.5;
     color: #333;
     font-family: Helvetica;
+    background-color: transparent;
 }
-
+dd, dl, ol, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrapper{
+    min-height: 100vh;
+    position: relative;
+    background-color: #f1f1f2;
+}
 .ol-header{
     position:fixed;
     display:flex;
@@ -26,7 +40,7 @@ body{
     height: 100%;
     justify-content: center;
     text-decoration: none;
-    color: #e2e3e3;
+    color: #f1f1f2;
     background-color: #c9252c;
     cursor: pointer;
     font-size: 35px;
@@ -42,7 +56,6 @@ body{
 }
 .ol-header .search input{
     margin: 0 10px;
-    padding: 0;
     height: 100%;
     font-size: 15px;
     color: #e2e3e3;
@@ -56,8 +69,7 @@ body{
     text-shadow: 2px 2px 2px #3a3e45;
 }
 .ol-header .main-nav{
-    margin:0;
-    padding: 0;
+    padding: 12px 0;
     width:500px;
     height:100%;
     color: #e2e3e3;
@@ -74,6 +86,88 @@ body{
     font-weight: bold;
     text-align: center;
 }
+.sec-nav{
+    position: fixed;
+    left: 0;
+    top: 85px;
+    width: 60px;
+    z-index: 3;
+    /*transition: left .4s ease-out;*/
+    background-color: #43444a;
+    color: #e2e3e3;
+}
+.sec-nav .root-node{
+    background-color: #43444a;
+    width: 60px;
+    z-index: 40;
+    position: relative;
+}
+.sec-nav .root-node a{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    border-left: solid 2px transparent;
+    border-bottom: 1px solid #43444a;
+}
+.sec-nav .root-node .tag-icon{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+#soccer span{
+    background-image: url(./img/soccer.svg);
+    background-size: 30px 30px;
+}
+#basketball span{
+    background-image: url(./img/basketball.png);
+    background-size: 30px 30px;
+}
+#lol span{
+    background-image: url(./img/lol.png);
+    background-size: 30px 30px;
+}
+.root-node .third-nav{
+    /*display: none;*/
+    position: absolute;
+    padding: 10px;
+    left:60px;
+    width:165px;
+    font-size: 16px;
+    color: #e2e3e3;
+    background-color: #4f555e;
+    line-height: 40px;
+    transform: translateX(-260px);
+    opacity: 0;
+    transition: transform .3s ease-out,opacity .2s ease-out;
+    z-index: -10;
+}
+.root-node .third-nav li{
+    text-indent: 2em;
+}
+#third-nav-soccer{
+    top:0;
+}
+.root-node:hover a{
+    transition: 30ms background-color ease-out;
+    border-left: 2px solid #c9252c;
+    background-color: #4f555e;
+    color: #fff;
+}
+.root-node:hover .third-nav{
+    /*display:block;*/
+    transform: translateX(0px);
+    opacity: 1;
+    z-index: -10;
+}
+.third-nav li:hover{
+    font-weight: bold;
+}
+
+
 @media (min-width: 769px) {
     .ol-header .logo{
         width:230px;

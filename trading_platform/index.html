@@ -11,7 +11,7 @@
         <div id="header" class="ol-header">
             <a class="logo" href="/" data-pushstate="enabled">章鱼彩票</a> <!--data-pushstate什么鬼不懂-->
             <div class="search">
-                <i class="icon-search"></i><input type="text" placeholder="Search">
+                <input type="text" placeholder="Search">
             </div>
             <nav class="main-nav">
                 <ul>
@@ -41,9 +41,34 @@
             </ul>
         </div>
         <div id="sidebar">
-            <h2></h2>
-            <div id="bets_accordion" class=""></div>
-            <div class="save_confirmation"></div>
+            <h2>
+                <ul>
+                    <li><a class="btn btn-up"><span class="icon-angle icon-angle-up"></span></a></li>
+                    <li><a class="btn btn-down"><span class="icon-angle icon-angle-down"></span></a></li>
+                </ul>
+                <div>
+                    <label>
+                        <input type="checkbox" checked="checked"><span>Smart-view</span>
+                    </label>
+                </div>
+            </h2>
+            <div id="bets_accordion" class="">
+                <div id="" class="">
+                    <div class="bets-toggle"><i class="icon-angle icon-angle-down"></i><span>Betslip</span></div>
+                    <div class="bets-inner">No selections</div>
+                </div>
+                <div id="" class="">
+                    <div class="bets-toggle"><i class="icon-angle icon-angle-down"></i><span>Unmatched Bets</span></div>
+                    <div class="bets-inner">No selections</div>
+                </div>
+                <div id="" class="">
+                    <div class="bets-toggle"><i class="icon-angle icon-angle-down"></i><span>Matched Bets</span></div>
+                    <div class="bets-inner">No selections</div>
+                </div>
+            </div>
+            <div id="save_confirmation">
+                <label><input type="checkbox"><span>Review orders before placing bets.</span><a href="#">What's this?</a></label>
+            </div>
         </div>
         <div id="content">
             <div class="banner"></div>

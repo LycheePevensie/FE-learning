@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="wrapper">
+        <!--顶部导航栏-->
         <div id="header" class="ol-header">
             <a class="logo" href="/" data-pushstate="enabled">章鱼彩票</a> <!--data-pushstate什么鬼不懂-->
             <div class="search">
@@ -23,10 +24,12 @@
                 </ul>
             </nav>
         </div>
+        <!--左侧二级导航栏-->
         <div id="sec-nav" class="sec-nav">
             <ul>
                 <li id="soccer" class="root-node">
                     <a href="#"><span class="tag-icon"></span></a>
+                    <!--三级导航栏-->
                     <ul id="third-nav-soccer" class="third-nav">
                         <h2>Soccer</h2>
                         <li>Agentina</li>
@@ -40,11 +43,12 @@
                 <li id="lol" class="root-node"><a href="#"><span class="tag-icon"></span></a></li>
             </ul>
         </div>
+        <!--右侧侧边栏-->
         <div id="sidebar">
             <h2>
                 <ul>
-                    <li><a class="btn btn-up"><span class="icon-angle icon-angle-up"></span></a></li>
-                    <li><a class="btn btn-down"><span class="icon-angle icon-angle-down"></span></a></li>
+                    <li><a class="btn btn-up"><span class="icon-angle  icon-chevron-up"></span></a></li>
+                    <li><a class="btn btn-down"><span class="icon-angle  icon-chevron-down"></span></a></li>
                 </ul>
                 <div>
                     <label>
@@ -54,15 +58,15 @@
             </h2>
             <div id="bets_accordion" class="">
                 <div id="" class="">
-                    <div class="bets-toggle"><i class="icon-angle icon-angle-down"></i><span>Betslip</span></div>
+                    <div class="bets-toggle"><i class="icon-angle icon-chevron-down"></i><span>Betslip</span></div>
                     <div class="bets-inner">No selections</div>
                 </div>
                 <div id="" class="">
-                    <div class="bets-toggle"><i class="icon-angle icon-angle-down"></i><span>Unmatched Bets</span></div>
+                    <div class="bets-toggle"><i class="icon-angle icon-chevron-down"></i><span>Unmatched Bets</span></div>
                     <div class="bets-inner">No selections</div>
                 </div>
                 <div id="" class="">
-                    <div class="bets-toggle"><i class="icon-angle icon-angle-down"></i><span>Matched Bets</span></div>
+                    <div class="bets-toggle"><i class="icon-angle icon-chevron-down"></i><span>Matched Bets</span></div>
                     <div class="bets-inner">No selections</div>
                 </div>
             </div>
@@ -70,9 +74,25 @@
                 <label><input type="checkbox"><span>Review orders before placing bets.</span><a href="#">What's this?</a></label>
             </div>
         </div>
+        <!--内容-->
         <div id="content">
-            <div class="banner"></div>
-            <div class=""></div>
+            <!--图片栏-->
+            <div class="banner">
+                <ul>
+                    <li class="banner-pic1"><div></div></li>
+                    <li>
+                        <ul>
+                            <li class="banner-pic2"></li>
+                            <li class="banner-pic3"></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="banner-toggle">
+                <h2>Popular Markets</h2>
+                <i class="icon-chevron-down"></i>
+                <p>Click here to hide the banner.</p>
+            </div>
             <div id="event_markets">
                 <ul class="markets"></ul>
             </div>

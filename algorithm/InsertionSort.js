@@ -19,3 +19,28 @@ function InsertionSort(arr){
     return arr;
 }
 console.log(InsertionSort(arr));
+
+//二分插入查找
+function dichotomyInsertionSort(arr){
+    console.time('二分插入排序算法耗时');
+    var key;
+    for(var i=1;i<arr.length;i++){
+        key = arr[i];
+        var middle,left = 0,right=i-1;
+        while(left<=right){
+            middle = parseInt((left+right)/2);
+            if(arr[middle]>key){
+                right = middle-1;
+            }else{
+                left = middle+1;
+            }
+        }
+        for(var j=i-1;j>=left;j--){
+            arr[j+1] = arr[j];
+        }
+        arr[left] = key;
+    }
+    console.timeEnd('二分插入排序算法耗时');
+    return arr;
+}
+console.log(dichotomyInsertionSort(arr));

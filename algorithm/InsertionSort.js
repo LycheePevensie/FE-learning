@@ -4,7 +4,7 @@
 var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
 
 function InsertionSort(arr){
-    console.time('插入排序算法耗时');
+    console.time('鎻掑叆鎺掑簭绠楁硶鑰楁椂');
     var key;
     for(var i=1;i<arr.length;i++){
         key=arr[i];
@@ -15,14 +15,14 @@ function InsertionSort(arr){
         }
         arr[j+1]=key;
     }
-    console.timeEnd('插入排序算法耗时');
+    console.timeEnd('鎻掑叆鎺掑簭绠楁硶鑰楁椂');
     return arr;
 }
 console.log(InsertionSort(arr));
 
-//二分插入查找
+//浜屽垎鎻掑叆鏌ユ壘
 function dichotomyInsertionSort(arr){
-    console.time('二分插入排序算法耗时');
+    console.time('浜屽垎鎻掑叆鎺掑簭绠楁硶鑰楁椂');
     var key;
     for(var i=1;i<arr.length;i++){
         key = arr[i];
@@ -40,7 +40,7 @@ function dichotomyInsertionSort(arr){
         }
         arr[left] = key;
     }
-    console.timeEnd('二分插入排序算法耗时');
+    console.timeEnd('浜屽垎鎻掑叆鎺掑簭绠楁硶鑰楁椂');
     return arr;
 }
 console.log(dichotomyInsertionSort(arr));

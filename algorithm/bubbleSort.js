@@ -2,9 +2,9 @@
  * Created by Lychee on 2016/10/24.
  */
 var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
-//·½·¨Ò»£ºÖ±½ÓÅÅ
+//æ–¹æ³•ä¸€ï¼šç›´æ¥æ’
 function bubbleSort(arr){
-    console.time('´¿Ã°ÅİÅÅĞòºÄÊ±');
+    console.time('çº¯å†’æ³¡æ’åºè€—æ—¶');
     var temp;
     for(var i=0;i<arr.length;i++){
         for(var j=0;j<arr.length-i-1;j++){
@@ -13,14 +13,14 @@ function bubbleSort(arr){
             }
         }
     }
-    console.timeEnd('´¿Ã°ÅİÅÅĞòºÄÊ±');
+    console.timeEnd('çº¯å†’æ³¡æ’åºè€—æ—¶');
     return arr;
 }
 console.log(bubbleSort(arr));
 
-//·½·¨¶ş£ºÓÅ»¯£¬ÉèÖÃposÖµ£¬¼õÉÙ±È½Ï´ÎÊı
+//æ–¹æ³•äºŒï¼šä¼˜åŒ–ï¼Œè®¾ç½®poså€¼ï¼Œå‡å°‘æ¯”è¾ƒæ¬¡æ•°
 function bubbleSort2(arr){
-    console.time('ÉèÖÃposÓÅ»¯ºóÃ°ÅİÅÅĞòºÄÊ±');
+    console.time('è®¾ç½®posä¼˜åŒ–åå†’æ³¡æ’åºè€—æ—¶');
     var temp,i=arr.length- 1,pos=0;
     while(i>0){
         for(var j=0;j<i;j++){
@@ -29,16 +29,16 @@ function bubbleSort2(arr){
                 pos = j;
             }
         }
-        i = pos;//posÖ®ºóÒÑÅÅºÃµÄ²»ÔÙÅÅĞò
+        i = pos;//posä¹‹åå·²æ’å¥½çš„ä¸å†æ’åº
     }
-    console.timeEnd('ÉèÖÃposÓÅ»¯ºóÃ°ÅİÅÅĞòºÄÊ±');
+    console.timeEnd('è®¾ç½®posä¼˜åŒ–åå†’æ³¡æ’åºè€—æ—¶');
     return arr;
 }
 console.log(bubbleSort2(arr));
 
-//·½·¨Èı£ºÓÅ»¯£¬Ã¿ÌËÅÅĞòÕı·´Ë«ÏòµÄÒ»¸ö×î´óÖµÒ»¸ö×îĞ¡Öµ
+//æ–¹æ³•ä¸‰ï¼šä¼˜åŒ–ï¼Œæ¯è¶Ÿæ’åºæ­£ååŒå‘çš„ä¸€ä¸ªæœ€å¤§å€¼ä¸€ä¸ªæœ€å°å€¼
 function bubbleSort3(arr){
-    console.time('Ë«ÏòÃ°ÅİÓÅ»¯ºóÃ°ÅİÅÅĞòºÄÊ±');
+    console.time('åŒå‘å†’æ³¡ä¼˜åŒ–åå†’æ³¡æ’åºè€—æ—¶');
     var temp, j,low= 0,high=arr.length-1;
     while(low<high){
         for(j=low;j<high;++j){
@@ -54,7 +54,7 @@ function bubbleSort3(arr){
         }
         ++low;
     }
-    console.timeEnd('Ë«ÏòÃ°ÅİÓÅ»¯ºóÃ°ÅİÅÅĞòºÄÊ±');
+    console.timeEnd('åŒå‘å†’æ³¡ä¼˜åŒ–åå†’æ³¡æ’åºè€—æ—¶');
     return arr;
 }
 console.log(bubbleSort3(arr));

@@ -3,9 +3,9 @@
  */
 var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
 
-//ÕÒ×îĞ¡Öµ
+//æ‰¾æœ€å°å€¼
 function selectionSort(arr){
-    console.time('1Ñ¡ÔñÅÅĞòºÄÊ±');
+    console.time('1é€‰æ‹©æ’åºè€—æ—¶');
     var temp,minIndex;
     for(var i=0;i<arr.length;i++){
         minIndex=i;
@@ -16,14 +16,14 @@ function selectionSort(arr){
         }
         temp=arr[i];arr[i]=arr[minIndex];arr[minIndex]=temp;
     }
-    console.timeEnd('1Ñ¡ÔñÅÅĞòºÄÊ±');
+    console.timeEnd('1é€‰æ‹©æ’åºè€—æ—¶');
     return arr;
 }
 console.log(selectionSort(arr));
 
-//ÕÒ×î´óÖµ
+//æ‰¾æœ€å¤§å€¼
 function selectionSort2(arr){
-    console.time('2Ñ¡ÔñÅÅĞòºÄÊ±');
+    console.time('2é€‰æ‹©æ’åºè€—æ—¶');
     var temp,maxIndex;
     for(var i=arr.length;i>0;--i){
         maxIndex=i;
@@ -34,7 +34,7 @@ function selectionSort2(arr){
         }
         temp=arr[i];arr[i]=arr[maxIndex];arr[maxIndex]=temp;
     }
-    console.timeEnd('2Ñ¡ÔñÅÅĞòºÄÊ±');
+    console.timeEnd('2é€‰æ‹©æ’åºè€—æ—¶');
     return arr;
 }
 console.log(selectionSort2(arr));

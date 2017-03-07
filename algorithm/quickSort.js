@@ -1,38 +1,32 @@
-var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
 function quickSort(arr,left,right){
-    console.time('快速排序耗时:')
-    if(left<right){
-        var x=arr[right],i=left-1,temp;
-        for(var j=left;j<=right;j++){
-            if(arr[j]<=x){
-                i++;
-                temp=arr[i];
-                arr[i]=arr[j];
-                arr[j]=temp;
-            }
-        }
-        quickSort(arr,left,i-1);
-        quickSort(arr,i+1,right)
-    }
-    console.timeEnd('快速排序耗时:')
-    return arr;
-}
-console.log(quickSort(arr,0,arr.length-1));
+	var left = typeof left == 'number' ? left : 0,
+		right = typeof right == 'number' ? right : arr.length-1,
+		partitionIndex;
+	if(left < right){
+		partitionIndex = partition(arr,left,right);
+		quickSort(arr,left,partitionIndex-1);
+		quickSort(arr,partitionIndex+1,right);
+	}
 
-function quickSort2(arr){
-    console.time('快速排序2耗时');
-    if(arr.length<=1){return arr};
-    var left=[],right=[],
-        pivotIndex = Math.floor(arr.length/2),
-        pivot = arr.splice(pivotIndex, 1)[0];
-    for(var i=0;i<arr.length;i++){
-        if(arr[i]<pivot){
-            left.push(arr[i]);
-        }else{
-            right.push(arr[i]);
-        }
-    }
-    console.timeEnd('快速排序2耗时');
-    return quickSort2(left).concat([pivot],quickSort2(right));
+	return arr;
 }
-console.log(quickSort2(arr));
+
+function partition(arr,left,right){
+	var qivot = left,
+	    index = left + 1;
+	for(let i=index; i<arr.length; i++){
+		if(arr[qivot] > arr[i]){
+			swap(arr,index,i);
+			index++;
+		}
+	}
+	swap(arr,qivot,index-1);
+
+	return index-1;
+}
+
+function swap(arr,i,j){
+	let temp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = temp;
+}

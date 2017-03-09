@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        td  {
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tbody id="content">
+        <tr>
+            <td rowspan="2">
+                A
+            </td>
+            <td colspan="2">
+                B
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">C</td>
+            <td>D</td>
+        </tr>
+        <tr>
+            <td>E</td>
+            <td>F</td>
+        </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    //new an Array
+    var result = [];
+    var content = document.getElementById('content');
+    var resultLength = content.children.length;
+    for(let i=0;i<resultLength;i++){
+        result.push([]);
+    }
+
+    function fillArr(){
+        let x, y;
+        for(let i=0;i<resultLength;i++){
+            let currentTr = content.children[i];
+            let td = currentTr.children;
+            let posX = i , posY = 0;  
+            for(let j=0;j<td.length;j++){
+                let currentTd = td[j];
+                currentTd.rowspan = currentTd.getAttribute("rowspan") ? ~~currentTd.getAttribute("rowspan") : 1;
+                currentTd.colspan = currentTd.getAttribute("colspan") ? ~~currentTd.getAttribute("colspan") : 1;
+                while(result[posX][posY] == ''){
+                    posY++;
+                }
+                result[posX][posY] = currentTd.innerText;
+                x = posX + currentTd.rowspan;
+                y = posY + currentTd.colspan;
+                for(let m=posX;m<x;m++){
+                    for(let n=posY;n<y;n++){
+                        if(!result[m][n]){
+                        result[m][n] = '';
+                        }
+                    }
+                }
+                posX = i;
+                posY += currentTd.colspan;
+            }
+        }
+        console.log(result);
+    }
+
+    fillArr();
+</script>
+</body>
+</html>

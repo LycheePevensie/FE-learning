@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<style>
+        td  {
+            border:1px solid black;
+        }
+    </style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td rowspan="2">A</td>
+				<td colspan="2">B</td>
+			</tr>
+			<tr>
+				<td rowspan="2">C</td>
+				<td>D</td>
+			</tr>
+			<tr>
+				<td>E</td>
+				<td>F</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+		var arrs = [];
+		var parents = document.getElementsByTagName('tr');
+		for (var i = 0, pNumber = parents.length; i < pNumber; i++) {
+			var arr = [];
+			var children = parents[i].getElementsByTagName('td');
+			for (var j = 0, cNumber = children.length; j < cNumber; j++) {
+				if (children[j].hasAttribute('rowspan')) {
+					var node = document.createElement('td');
+					node.innerHTML = '';
+					var nextRow = parents[i+1].getElementsByTagName('td');
+					parents[i+1].insertBefore(node, nextRow[j]);
+					arr.push(children[j].innerHTML.toString());
+				}
+				else if (children[j].hasAttribute('colspan')) {
+					arr.push(children[j].innerHTML.toString());
+					arr.push('');
+				}
+				else {
+					arr.push(children[j].innerHTML.toString());
+				}
+			}
+			arrs.push(arr);
+		}
+		console.log(arrs);
+		</script>
+	</body>
+</html>

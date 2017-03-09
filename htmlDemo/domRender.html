@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        td  {
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tbody id="content">
+        <tr>
+            <td rowspan="2">
+                a
+            </td>
+            <td colspan="2">
+                b
+            </td>
+        </tr>
+        <tr>
+            <td>c</td>
+            <td>d</td>
+        </tr>
+        <tr>
+            <td>e</td>
+            <td colspan="2" rowspan="2">f</td>
+        </tr>
+        <tr><td>g</td></tr>
+    </tbody>
+    <script>
+        let dom = document.getElementById('content'),
+            children = dom.children
+        let result = []
+        for(let i = 0;i < children.length;i++) result.push([])
+        for(let i = 0;i < children.length;i++){
+            let tr = children[i]
+            let arr = result[i]
+            for(let j = 0;j < children[i].children.length;j++){
+                console.log('i:'+i)
+                console.log('j:'+j)
+                let td = tr.children[j]
+                let content = td.innerText
+                let arrLen = arr.length
+                if(td.getAttribute('colspan') === null  && td.getAttribute('rowspan') === null){
+                    let pos = arrLen;
+                    if(arrLen > j){
+                        let space = arr.findIndex(val => val === undefined)
+                        pos = space == -1 ?pos:space
+                    }
+                    arr[pos] = content
+                    continue
+                }
+                if(td.getAttribute('colspan') !== null){
+                    let len = ~~td.getAttribute('colspan')
+                    let pos = findSpace(arr,len)
+                    if(pos === -1) pos = arr.length
+                    let rows = td.getAttribute('rowspan') === null ? 1 : ~~td.getAttribute('rowspan')
+                    for(let row = 0;row < rows;row++){
+                        for(let z = 0;z < len;z++){
+                            result[row+i][pos+z] = content;
+                        }
+                    }
+                    continue
+                }
+                if(td.getAttribute('rowspan') !== null){
+                    let len = ~~td.getAttribute('rowspan')
+                    let pos = findSpace(arr,1)
+                    if(pos === -1) pos = arr.length
+                    for(let z = 0;z < len;z++){
+                        result[i+z][pos] = content;
+                    }
+                }
+
+            }
+        }
+        console.log(result);
+        function findSpace(arr,len){
+            for(let i = 0;i < arr.length-len;){
+                let j = 0
+                for(;j < len;j++){
+                    if(arr[i+j] !== undefined){
+                        i = i+j+1
+                        break
+                    }
+                }
+                if(j == len){
+                    return i
+                }
+            }
+            return -1
+        }
+    </script>
+</table>
+</body>
+</html>

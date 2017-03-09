@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>css实现九宫格</title>
+  <style type="text/css">
+ /* .clearfix:before, .clearfix:after{
+    content: "";
+    display: block;
+  }
+  .clearfix:after {
+    clear: both;
+  }*/
+  
+  .wrapper{
+    width: 154px;
+    height:154px;
+    padding: 1px 0 0 1px;
+    font-size: 0;
+  }
+  .backBlock{
+    position: relative;
+    float: left;
+    width:52px;
+    height:52px;
+    margin:-1px 0 0 -1px;
+    background-color: #00f;
+    z-index: 1;
+  }
+  .fontBlock{
+    width:50px;
+    height:50px;
+    background-color: #fff;
+    margin: 1px;
+    z-index: 1;
+  }
+  .backBlock:hover{
+    background-color: #f00;
+    z-index: 2;
+  }
+  .outter{
+    list-style: none;
+    padding: 1px 0 0 1px;
+  }
+  .inner{
+    position: relative;
+    float: left;
+    margin: -1px 0 0 -1px;
+    width: 50px;
+    height: 50px;
+    border:1px solid #00f;
+    z-index: 1;
+  }
+  .inner:hover {
+    border:1px solid #f00;
+    z-index: 2;
+  }
+  
+  </style>
+</head>
+<body>
+  <h3>纯div，background-color实现边框效果</h3>
+  <div class="wrapper">
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>
+    <div class="backBlock">
+      <div class="fontBlock"></div>
+    </div>    
+  </div>
+
+  <h3>ul a li border实现边框效果</h3>
+  <div class="wrapper">
+    <ul class="outter">
+      <li class="inner"></li>      
+      <li class="inner"></li>
+      <li class="inner"></li>
+      <li class="inner"></li>
+      <li class="inner"></li>
+      <li class="inner"></li>
+      <li class="inner"></li>
+      <li class="inner"></li>
+      <li class="inner"></li>      
+    </ul>
+  </div>
+</body>
+</html>

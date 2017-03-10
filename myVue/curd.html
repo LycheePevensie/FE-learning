@@ -40,7 +40,10 @@
             </thead>
             <tbody>
                 <tr v-for="(index, entry) in dataList | filterBy searchKey">
-                    <td v-for="col in columns"> {{ entry[col.name] }} </td>
+                    <td v-for="col in columns">
+                        <span v-if="col.isKey"><a href="javascript:void(0)" @click="openEditItemDialog(entry[col.name])">{{ entry[col.name] }}</a></span>
+                        <span v-else>{{ entry[col.name] }}</span>
+                    </td>
                     <td class="text-center">
                         <button class= 'btn-danger' @click="deletePerson(entry)">Delete</button>
                     </td>
@@ -51,7 +54,7 @@
             <button @click="openNewItemDialog('Create New Item')">Create</button>
         </div>
 
-        <modal-dialog :mode="mode" :title="title" :fields="columns" :item="item" v-on:create-person="createPerson">
+        <modal-dialog :mode="mode" :title="title" :fields="columns" :item="item" v-on:create-person="createPerson" v-on:edit-person="editPerson">
         </modal-dialog>
     </template>
 
@@ -65,10 +68,10 @@
                     <div class="dialog-body">
                         <div v-for="field in fields" class="form-group">
                             <label>{{field.name}}</label>
-                            <select v-if="field.dataSource" v-model="item[field.name]">
+                            <select v-if="field.dataSource" v-model="item[field.name]" :disabled="mode ===2 && field.isKey">
                                 <option v-for="opt in field.dataSource" :value="opt">{{opt}}</option>
                             </select>
-                            <input v-else type="text" v-model="item[field.name]">
+                            <input v-else type="text" v-model="item[field.name]" :disabled="mode === 2 && field.isKey">
                         </div>
                     </div>
                     <footer class="dialog-footer">
@@ -95,6 +98,14 @@
                   item:{}
               }
             },
+            ready:function(){
+                for(var i=0;i<this.columns.length;i++){
+                    if(this.columns[i].isKey){
+                        this.keyColumn = this.columns[i]['name']
+                        break;
+                    }
+                }
+            },
             methods: {
                 openNewItemDialog:function (title) {
                     this.title = title;
@@ -102,9 +113,66 @@
                     this.item ={};
                     this.$broadcast('showDialog',true)
                 },
+                openEditItemDialog:function (index){
+                    var currentItem = this.findItemByKey(index);
+                    this.title = 'Edit Person - '+ index;
+                    this.mode = 2;
+                    this.item = this.initItemForUpdate(currentItem);
+                    this.$broadcast('showDialog',true)
+
+                },
+                initItemForUpdate:function (p,c) {
+                    c = c || {};
+                    for(var i in p){
+                        if(p.hasOwnProperty(i)){
+                            if(typeof p[i] === 'object'){
+                                c[i] = Array.isArray(p[i]) ? [] : {};
+                                this.initItemForUpdate(p[i],c[i]);
+                            }else{
+                                c[i] = p[i];
+                            }
+                        }
+                    }
+                    return c;
+                },
+                findItemByKey: function(index){
+                    let keyColumn = this.keyColumn;
+                    for(var i=0;i<this.dataList.length;i++){
+                        if(this.dataList[i][keyColumn] === index){
+                            return this.dataList[i];
+                        }
+                    }
+                },
+                itemExit:function(){
+                    let keyColumn = this.keyColumn;
+                    for(let i=0;i<this.dataList.length;i++){
+                        if(this.dataList[i][keyColumn] === this.item[keyColumn])
+                                return true;
+                    }
+                    return false;
+                },
                 createPerson:function(){
-                    this.dataList.push(this.item)
-                    this.$broadcast('showDialog',false)
+                    let keyColumn = this.keyColumn;
+                    if(!this.itemExit()){
+                        this.dataList.push(this.item)
+                        this.$broadcast('showDialog',false)
+                        this.item={}
+                    }else{
+                        alert(keyColumn + '"' + this.item[keyColumn] + '"is already exist' )
+                    }
+
+                },
+                editPerson:function(){
+                    let keyColumn = this.keyColumn;
+                    for(var i=0;i<this.dataList.length;i++){
+                       if(this.dataList[i][keyColumn] === this.item[keyColumn]){
+                           for( let j in this.item){
+                               this.dataList[i][j] = this.item[j];
+                           }
+                           break;
+                       }
+                    }
+                    this.$broadcast('showDialog',false);
                     this.item={}
                 },
                 deletePerson: function(entry){
@@ -134,6 +202,8 @@
                       save: function(){
                           if(this.mode === 1){
                               this.$dispatch('create-person')
+                          }else if(this.mode ===2){
+                              this.$dispatch('edit-person')
                           }
                       }
                   },
